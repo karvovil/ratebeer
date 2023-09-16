@@ -4,5 +4,4 @@ class Rating < ApplicationRecord
   def to_s
     "tekstiesitys"
   end
-  
 end

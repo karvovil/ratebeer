@@ -2,7 +2,7 @@ class Brewery < ApplicationRecord
   include RatingAverage
 
   has_many :beers, dependent: :destroy
-	has_many :ratings, through: :beers
+  has_many :ratings, through: :beers
 
   def print_report
     puts name
@@ -16,7 +16,6 @@ class Brewery < ApplicationRecord
   end
 
   def to_s
-    self.name
+    name
   end
-
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# comment
 class CreateBeers < ActiveRecord::Migration[7.0]
   def change
     create_table :beers do |t|
