@@ -7,4 +7,8 @@ class Beer < ApplicationRecord
 		rates.sum.to_f / ratings.count.to_f
 	end
 
+	def to_s
+    self.name + ", " + self.brewery.name
+  end
+
 end
