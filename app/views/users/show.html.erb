@@ -14,20 +14,31 @@
     <% end %>
   </p>
 
-    <strong>ratings:</strong>
-    <ul>
-      <% current_user.ratings.each do |r| %>
-        <li>
-          <%= render r %>
-          <%=
-            button_to 'delete',
-            r,
-            method: :delete,
-            form: { data: { turbo_confirm: 'Are you sure?' } }
-          %>
-        </li>
-      <% end %>
-    </ul>
+    <strong>member of</strong>
+    <% if current_user.ratings.empty? %>
+      Has no clubs
+    <% else %> 
+      <ul>
+        <% current_user.beer_clubs.each do |bc| %>
+          <li><%= link_to bc.name, bc %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+  <strong>ratings:</strong>
+  <ul>
+    <% current_user.ratings.each do |r| %>
+      <li>
+        <%= render r %>
+        <%=
+          button_to 'delete',
+          r,
+          method: :delete,
+          form: { data: { turbo_confirm: 'Are you sure?' } }
+        %>
+      </li>
+    <% end %>
+  </ul>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
