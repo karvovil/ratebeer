@@ -1,6 +1,33 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @user %>
+  <p>
+    <strong>Username:</strong>
+    <%= current_user.username %>
+  </p>
+
+  <p>
+    <% if current_user.ratings.empty? %>
+      Has no ratings
+    <% else %> 
+      Has made <%= pluralize(current_user.ratings.count, 'rating') %> ratings, 
+      average rating <%= current_user.average_rating %>
+    <% end %>
+  </p>
+
+    <strong>ratings:</strong>
+    <ul>
+      <% current_user.ratings.each do |r| %>
+        <li>
+          <%= render r %>
+          <%=
+            button_to 'delete',
+            r,
+            method: :delete,
+            form: { data: { turbo_confirm: 'Are you sure?' } }
+          %>
+        </li>
+      <% end %>
+    </ul>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
