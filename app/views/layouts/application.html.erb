@@ -30,12 +30,6 @@
         <%= link_to 'Log in', new_session_path %>
       <% end %>
     </div>
-      <% if session[:last_rating].nil? %>
-        <p>no ratings given</p>
-      <% else %>
-        <p>previous rating: <%= session[:last_rating] %></p>
-      <% end %>
-
 
     <%= yield %>
   </body>

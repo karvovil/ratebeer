@@ -2,40 +2,38 @@
 
   <p>
     <strong>Username:</strong>
-    <%= current_user.username %>
+    <%= @user.username %>
   </p>
 
   <p>
-    <% if current_user.ratings.empty? %>
+    <% if @user.ratings.empty? %>
       Has no ratings
     <% else %> 
-      Has made <%= pluralize(current_user.ratings.count, 'rating') %> ratings, 
-      average rating <%= current_user.average_rating %>
+      Has made <%= pluralize(@user.ratings.count, 'rating') %> ratings, 
+      average rating <%= @user.average_rating %>
     <% end %>
   </p>
 
-    <strong>member of</strong>
-    <% if current_user.ratings.empty? %>
-      Has no clubs
-    <% else %> 
+  <p>
+    <% if @user.ratings.empty? %>
+      Has no memberships
+    <% else %>
+      <strong>member of</strong>
       <ul>
-        <% current_user.beer_clubs.each do |bc| %>
+        <% @user.beer_clubs.each do |bc| %>
           <li><%= link_to bc.name, bc %></li>
         <% end %>
       </ul>
     <% end %>
+  </p>
 
   <strong>ratings:</strong>
   <ul>
-    <% current_user.ratings.each do |r| %>
-      <li>
-        <%= render r %>
-        <%=
-          button_to 'delete',
-          r,
-          method: :delete,
-          form: { data: { turbo_confirm: 'Are you sure?' } }
-        %>
+    <% @user.ratings.each do |rating| %>
+      <li><%= "#{rating.to_s}" %>
+        <% if @user == current_user %>
+          <%= link_to "Delete", rating, data: {turbo_method: :delete} %>
+        <% end %>
       </li>
     <% end %>
   </ul>
