@@ -13,8 +13,23 @@ class User < ApplicationRecord
   validate :password_has_number_and_capital, on: :create
 
   def password_has_number_and_capital
-    return if password.match(/(?=.*[0-9])(?=.*[0-9])/)
+    return if password && password.match(/(?=.*[0-9])(?=.*[0-9])/)
 
     errors.add(:password, "needs a number and a capital")
+  end
+
+  def favorite_beer
+    return nil if ratings.empty?   # palautetaan nil jos reittauksia ei ole
+
+    ratings.sort_by{ |r| r.score }.last.beer
+    # OR ratings.sort_by(&:score).last.beer
+  end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    rates = ratings.group_by {|r| r.beer.style}
+    asdf = rates.map { |k, v| [k, (v.map &:score).sum] }
+    asdf.sort_by{ |_k, v| v }.last.first
   end
 end
