@@ -53,14 +53,13 @@ RSpec.describe User, type: :model do
     end
 
     it "without ratings does not have a favorite beer" do
-      expect(user.favorite_style).to eq(nil)
+      expect(user.favorite_beer).to eq(nil)
     end
 
     it "is the only rated if only one rating" do
-      beer = FactoryBot.create(:beer)
-      rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
+      rating = FactoryBot.create(:rating, score: 20, user: user)
 
-      expect(user.favorite_beer).to eq(beer)
+      expect(user.favorite_beer).to eq(rating.beer)
     end
 
     it "is the one with highest rating if several rated" do
