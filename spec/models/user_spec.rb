@@ -44,7 +44,34 @@ RSpec.describe User, type: :model do
       expect(user.average_rating).to eq(15.0)
     end
   end
-
+  
+  describe "favorite style" do
+    let(:user){ FactoryBot.create(:user) }
+    
+    it "has method for determining the favorite style" do
+      expect(user).to respond_to(:favorite_style)
+    end
+    
+    it "without ratings does not have a favorite style" do
+      expect(user.favorite_style).to eq(nil)
+    end
+    
+    it "is the only rated if only one rating" do
+      beer = FactoryBot.create(:beer)
+      rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
+      
+      expect(user.favorite_style).to eq(beer.style)
+    end
+    
+    it "is the one with highest sum of ratings if several rated" do
+      lager1 = create_beer_with_rating({ user: user }, 20 )
+      lager2 = create_beer_with_rating({ user: user }, 25 )
+      stout1 = create_beer_with_rating({ user: user, style: "Stout"}, 23 )
+      stout2 = create_beer_with_rating({ user: user, style: "Stout"}, 24 )
+      expect(user.favorite_style).to eq(stout1.style)
+    end
+  end
+  
   describe "favorite beer" do
     let(:user){ FactoryBot.create(:user) }
 
@@ -67,33 +94,6 @@ RSpec.describe User, type: :model do
       best = create_beer_with_rating({ user: user }, 25 )
 
       expect(user.favorite_beer).to eq(best)
-    end
-  end
-
-  describe "favorite style" do
-    let(:user){ FactoryBot.create(:user) }
-
-    it "has method for determining the favorite style" do
-      expect(user).to respond_to(:favorite_style)
-    end
-
-    it "without ratings does not have a favorite style" do
-      expect(user.favorite_style).to eq(nil)
-    end
-
-    it "is the only rated if only one rating" do
-      beer = FactoryBot.create(:beer)
-      rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
-
-      expect(user.favorite_style).to eq(beer.style)
-    end
-
-    it "is the one with highest sum of ratings if several rated" do
-      lager1 = create_beer_with_rating({ user: user }, 20 )
-      lager2 = create_beer_with_rating({ user: user }, 25 )
-      stout1 = create_beer_with_rating({ user: user, style: "Stout"}, 23 )
-      stout2 = create_beer_with_rating({ user: user, style: "Stout"}, 24 )
-      expect(user.favorite_style).to eq(stout1.style)
     end
   end
 
