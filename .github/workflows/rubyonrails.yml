@@ -33,7 +33,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Run migrations
-        run: bundle exec rails db:migrate
+#      - name: Create db    
+#        run: bundle exec rails db:create
+#      - name: Run migrations
+#        run: bundle exec rails db:migrate
       - name: Run tests
         run: bundle exec rspec
