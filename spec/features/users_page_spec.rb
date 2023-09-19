@@ -3,9 +3,7 @@ require 'rails_helper'
 include Helpers
 
 describe "User" do
-  before :each do
-    FactoryBot.create :user
-  end
+  let!(:user) { FactoryBot.create :user }
 
   describe "who has signed up" do
     it "can signin with right credentials" do
@@ -47,7 +45,7 @@ describe "User" do
     it "can see his ratings on his page, but no others ratings" do
       user2 =  FactoryBot.create(:user, username: 'Make') 
       FactoryBot.create(:rating, score: 17, user: user2)
-      visit user_path(1)
+      visit user_path(user.id)
 
       expect(page).to have_content 'anonymous 10'
       expect(page).to have_content 'anonymous 20'
@@ -56,14 +54,14 @@ describe "User" do
     end
 
     it "can remove his rating" do
-      visit user_path(1)
+      visit user_path(user.id)
       find(:xpath, "(//a[text()='Delete'])[1]").click
       expect(Rating.count).to eq(1)
       expect(page).to_not have_content 'anonymous 10'
     end
 
     it "can see favorite beer and brewery" do
-      visit user_path(1)
+      visit user_path(user.id)
       expect(page).to have_content 'Favorite beer: anonymous'
       expect(page).to have_content 'Favorite brewery: anonymous'
     end
