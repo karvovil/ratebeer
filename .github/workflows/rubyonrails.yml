@@ -35,7 +35,7 @@ jobs:
           bundler-cache: true
 #      - name: Create db    
 #        run: bundle exec rails db:create
-#      - name: Run migrations
-#        run: bundle exec rails db:migrate
+      - name: Run migrations
+        run: bundle exec rails db:migrate
       - name: Run tests
         run: bundle exec rspec
