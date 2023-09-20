@@ -2,6 +2,8 @@
 
 Deployed at https://rate-my-beer.fly.dev
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/909eda280ba61ac7090e/maintainability)](https://codeclimate.com/github/karvovil/ratebeer/maintainability)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
