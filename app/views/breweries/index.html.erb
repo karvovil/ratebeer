@@ -22,6 +22,5 @@
     <%=link_to 'list of beers', beers_path %>
   </p>
 </div>
-  
-<%= link_to "New brewery", new_brewery_path %>
-20.9 13:55
+<%= link_to('New Brewery', new_brewery_path) if current_user %>
+20.9 14:10
