@@ -77,6 +77,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 gem 'dockerfile-rails', '>= 1.5', group: :development
@@ -86,3 +87,5 @@ gem 'sentry-ruby', '~> 5.11'
 gem 'sentry-rails', '~> 5.11'
 
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'httparty'
