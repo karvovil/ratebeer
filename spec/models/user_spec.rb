@@ -60,15 +60,16 @@ RSpec.describe User, type: :model do
       beer = FactoryBot.create(:beer)
       rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
       
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style).to eq(beer.style.name)
     end
     
     it "is the one with highest sum of ratings if several rated" do
       lager1 = create_beer_with_rating({ user: user }, 20 )
       lager2 = create_beer_with_rating({ user: user }, 25 )
-      stout1 = create_beer_with_rating({ user: user, style: "Stout"}, 23 )
-      stout2 = create_beer_with_rating({ user: user, style: "Stout"}, 24 )
-      expect(user.favorite_style).to eq(stout1.style)
+      style2 = FactoryBot.create(:style, name: "thebest style")
+      stout1 = create_beer_with_rating({ user: user, style: style2}, 23 )
+      stout2 = create_beer_with_rating({ user: user, style: style2}, 24 )
+      expect(user.favorite_style).to eq(stout1.style.name)
     end
   end
   

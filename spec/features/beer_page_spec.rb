@@ -5,6 +5,7 @@ include Helpers
 describe "Beer" do
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
   let!(:user) { FactoryBot.create :user }
+  let!(:style) { FactoryBot.create :style}
 
   describe "when logged in" do
     before :each do
@@ -14,8 +15,8 @@ describe "Beer" do
     it "when name is valid, can be added" do
       visit new_beer_path
       select('Koff', from: 'beer[brewery_id]')
-      select('IPA', from: 'beer[style]')
-      fill_in('beer[name]', with: 'Koffin ipa')
+      select('Weizen', from: 'beer[style_id]')
+      fill_in('beer[name]', with: 'Koffin Vehenae')
 
       expect{
         click_button "Create Beer"
@@ -25,7 +26,7 @@ describe "Beer" do
     it "with nonvalid name, can not be added" do
       visit new_beer_path
       select('Koff', from: 'beer[brewery_id]')
-      select('IPA', from: 'beer[style]')
+      select('Weizen', from: 'beer[style_id]')
       fill_in('beer[name]', with: '')
       click_button "Create Beer"
 
