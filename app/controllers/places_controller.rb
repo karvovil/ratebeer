@@ -13,6 +13,6 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @place = Rails.cache.read(session[:city].downcase).detect {|p| p["id"] = params[:id] } 
+    @place = Rails.cache.read(session[:city].downcase).detect { |p| p["id"] = params[:id] }
   end
 end
