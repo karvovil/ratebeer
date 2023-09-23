@@ -8,6 +8,7 @@
 <% end %>
 
 <% if @weather %>
+  <%= @weather%>
   <p><strong> Current beer weather in <%= @places.first.city %></strong></p>
   <p><%= @weather["temperature"] %> Celsius</p>
   <%= image_tag @weather["weather_icons"].first %>

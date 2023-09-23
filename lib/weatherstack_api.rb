@@ -1,9 +1,8 @@
 class WeatherstackApi
-
   def self.get_weather_in(city)
     url = "http://api.weatherstack.com/current?access_key=#{key}&query=#{city}"
 
-    weather = HTTParty.get(url).parsed_response["current"]
+    HTTParty.get(url).parsed_response["current"]
   end
 
   def self.key

@@ -1,6 +1,0 @@
-# This file overrides ENV variables in the Unix shell.
-# For example, setting:
-# GMAIL_USERNAME: 'Your_Gmail_Username'
-# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
-BEERMAPPING_APIKEY: "d634e44d9481977ff484c3cb1c5cbe9f"
-WEATHERSTACK_APIKEY: "148aaf41d2a6e4b84a27f01374bb1b41"
