@@ -37,3 +37,4 @@ coverage/index.html
 coverage/.resultset.json
 .bashrc
 config/local_env.yml
+local_env.yml
