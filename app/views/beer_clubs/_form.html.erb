@@ -12,21 +12,22 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, { class: "form-label"} %>
+    <%= form.text_field :name, { class: "form-control", placeholder: "Club Name" } %>
   </div>
 
   <div>
-    <%= form.label :founded, style: "display: block" %>
-    <%= form.number_field :founded %>
+    <%= form.label :founded, { class: "form-label"} %>
+    <%= form.number_field :founded, { class: "form-control", placeholder: "Founding Year" } %>
   </div>
 
   <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+    <%= form.label :city, { class: "form-label"} %>
+    <%= form.text_field :city, { class: "form-control", placeholder: "City" } %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </div>
+
 <% end %>

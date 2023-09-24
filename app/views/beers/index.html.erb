@@ -1,25 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Beers</h1>
 
 <div id="beers">
-  <% @beers.each do |beer| %>
-    <p>
-      <strong>Name:</strong>
-      <%= link_to beer.name, beer %>
-    </p>
-
-    <p>
-      <strong>Style:</strong>
-      <%= beer.style.name %>
-    </p>
-
-    <p>
-      <strong>Brewery:</strong>
-      <%= link_to beer.brewery.name, beer.brewery%>
-    </p>
-  <% end %>
-
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td><strong>Beer</strong></td>
+        <td><strong>Style</strong></td>
+        <td><strong>Brewery</strong></td>
+        <td><strong>Rating</strong></td>
+      </tr>
+    </thead>
+    <% @beers.each do |beer| %>
+      <tr>
+        <td><%= link_to beer.name, beer %></td>
+        <td><%= beer.style.name %></td>
+        <td><%= link_to beer.brewery.name, beer.brewery%></td>
+        <td><%= beer.average_rating %></td>
+      </tr>
+    <% end %>
+  </table> 
   <p>
     <%=link_to 'list of breweries', breweries_path %>
   </p>

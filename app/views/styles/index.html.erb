@@ -1,12 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Styles</h1>
 
 <div id="styles">
   <% @styles.each do |style| %>
     <%= render style %>
     <p>
-      <%= link_to "Show this style", style %>
+      <%= link_to "Show this style", style, class:"btn btn-info" %>
     </p>
   <% end %>
 </div>
