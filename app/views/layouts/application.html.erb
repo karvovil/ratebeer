@@ -41,10 +41,10 @@
             </li>
             <% if current_user %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                   Dropdown link
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-dark">
                   <li class="nav-item">
                     <%= link_to "#{current_user.username}", current_user , { class: "nav-link" } %>
                   </li>

@@ -20,8 +20,8 @@
     <% end %>
   </table> 
   <p>
-    <%=link_to 'list of breweries', breweries_path %>
+    <%=link_to 'list of breweries', breweries_path, class:"btn btn-secondary" %>
   </p>
 </div>
 
-<%= link_to('New Beer', new_beer_path) if current_user %>
+<%= link_to('New Beer', new_beer_path, class:"btn btn-success") if current_user %>

@@ -10,7 +10,7 @@
   <% end %>
 
   <div>
-    <%= link_to "Edit this beer", edit_beer_path(@beer) %>
+    <%= link_to "Edit this beer", edit_beer_path(@beer), class:"btn btn-warning" %>
     <%= button_to "Destroy this beer", @beer, method: :delete, class:"btn btn-danger" %>
   </div>
 <% end %>

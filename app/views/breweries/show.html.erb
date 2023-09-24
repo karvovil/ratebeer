@@ -1,9 +1,9 @@
 <%= render @brewery %>
 
 <div>
-  <%= link_to "Back to breweries", breweries_path %>
+  <%= link_to "Back to breweries", breweries_path, class:"btn btn-secondary" %>
   <% if current_user %>
-    | <%= link_to "Edit this brewery", edit_brewery_path(@brewery) %>
+    | <%= link_to "Edit this brewery", edit_brewery_path(@brewery), class:"btn btn-warning" %>
     <%= button_to "Destroy this brewery", @brewery, method: :delete, class:"btn btn-danger" %>
   <% end %>
 </div>
