@@ -39,6 +39,7 @@ COPY --link . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN chmod a+rx ./bin/docker-entrypoint
 RUN chmod a+rx ./bin/rails
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
 
@@ -65,7 +66,6 @@ ENV RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true"
 
 # Entrypoint prepares the database.
-RUN chmod a+rx /rails/bin/docker-entrypoint
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
