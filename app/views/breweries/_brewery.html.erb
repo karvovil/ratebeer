@@ -4,6 +4,9 @@
       <strong><%= brewery.name%></strong>
     </h2>
     <i> Established at <%= brewery.year %> </i>
+    <% if not brewery.active  %>
+      <span class="badge bg-secondary">retired</span>
+    <% end %>
   </p>
 
   <p>

@@ -39,4 +39,9 @@ class User < ApplicationRecord
     breweries = ratings.map { |r| r.beer.brewery }
     breweries.uniq.max_by(&:average_rating)
   end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |a| a.ratings.count }
+    sorted_by_rating_in_desc_order.last(3).reverse
+  end
 end

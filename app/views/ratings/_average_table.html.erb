@@ -1,0 +1,17 @@
+<% if items %> 
+  <h3>Top <%= pluralize(items.count, items.first.class.name) %></h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td><strong><%= items.first.class.name %></strong></td>
+        <td><strong>Average</strong></td>
+      </tr>
+    </thead>
+    <% items.each do |i| %>
+      <tr>
+        <td><%= i.name %></td>
+        <td><%= i.average_rating %></td>
+      </tr>
+    <% end %>
+  </table> 
+<% end %>  
