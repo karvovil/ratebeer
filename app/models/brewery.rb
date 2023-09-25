@@ -9,7 +9,7 @@ class Brewery < ApplicationRecord
   validate :year_cannot_be_in_future, on: :create
 
   scope :active, -> { where active: true }
-  scope :retired, -> { where active: [nil,false] }
+  scope :retired, -> { where active: [nil, false] }
 
   def year_cannot_be_in_future
     return unless year > Date.today.year || year < 1040
@@ -32,8 +32,8 @@ class Brewery < ApplicationRecord
     name
   end
 
-  def self.top(n)
-    sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |a| a.average_rating }
-    sorted_by_rating_in_desc_order.last(3).reverse
+  def self.top(num)
+    sorted_by_rating_in_desc_order = Brewery.all.sort_by(&:average_rating)
+    sorted_by_rating_in_desc_order.last(num).reverse
   end
 end
