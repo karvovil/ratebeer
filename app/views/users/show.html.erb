@@ -1,6 +1,6 @@
   <%= render @user %>
   <p>
-    <%if current_user.admin %>
+    <%if current_user&.admin %>
       <%=  link_to "Toggle activity", toggle_activity_user_path(@user.id), data: {turbo_method: "post"}, class:"btn btn-warning"%>
     <% end %>
   </p>
