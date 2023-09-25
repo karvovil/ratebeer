@@ -5,8 +5,10 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
+    if user.closed
+      redirect_to signin_path, notice: "Your account is closed, please contact admin"
     # tarkastetaan että käyttäjä olemassa, ja että salasana on oikea
-    if user&.authenticate(params[:password])
+    elsif user&.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user_path(user), notice: "Welcome back!"
     else

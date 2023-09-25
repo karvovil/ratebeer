@@ -1,7 +1,7 @@
 <div id="<%= dom_id brewery %>">
   <p>
     <h4>
-      <strong><%= brewery.name%></strong>
+      <strong><%= link_to brewery.name, brewery %></strong>
     </h4>
     <i> Established at <%= brewery.year %> </i>
     <% if not brewery.active  %>

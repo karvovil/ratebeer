@@ -8,8 +8,6 @@
     score: <%= form.number_field :score %>
     <%= form.submit "Create rating", class:"btn btn-primary" %>
   <% end %>
-
-  <div>
-    <%= edit_and_destroy_buttons(@beer) %>
-  </div>
 <% end %>
+
+<%= edit_and_destroy_buttons(@beer) %>

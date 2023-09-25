@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   resources :styles
   resources :memberships
   resources :beer_clubs
-  resources :users
   resources :beers
-  resources :breweries
+
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
+  
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'breweries#index'

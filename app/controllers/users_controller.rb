@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :ensure_that_is_admin, only: [:destroy, :toggle_activity]
 
   # GET /users or /users.json
   def index
@@ -60,6 +61,15 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unauthorized }
       end
     end
+  end
+
+  def toggle_activity
+    user = User.find(params[:id])
+    user.update_attribute :closed, (not user.closed)
+  
+    new_status = user.closed? ? "closed" : "active"
+  
+    redirect_to user, notice:"user activity status changed to #{new_status}"
   end
 
   private
