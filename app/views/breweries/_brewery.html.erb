@@ -1,8 +1,8 @@
 <div id="<%= dom_id brewery %>">
   <p>
-    <h2>
+    <h4>
       <strong><%= brewery.name%></strong>
-    </h2>
+    </h4>
     <i> Established at <%= brewery.year %> </i>
     <% if not brewery.active  %>
       <span class="badge bg-secondary">retired</span>
@@ -21,9 +21,7 @@
       <%= link_to beer.name, beer %>
     <% end %>
   </p>
-    <p>
-    <%=link_to 'list of beers', beers_path, class:"btn btn-secondary" %>
-  </p>
+
   <p>
     <% if brewery.ratings.empty? %>
       brewery has not yet been rated!
