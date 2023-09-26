@@ -34,7 +34,18 @@
       <strong>member of</strong>
       <ul>
         <% @user.beer_clubs.each do |bc| %>
-          <li><%= link_to bc.name, bc %></li>
+          <% if @user.get_membership(bc)&.confirmed %>
+            <li><%= link_to bc.name, bc %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      
+      <strong>applied membership of</strong>
+      <ul>
+        <% @user.beer_clubs.each do |bc| %>
+          <% if !@user.get_membership(bc)&.confirmed %>
+            <li><%= link_to bc.name, bc %></li>
+          <% end %>
         <% end %>
       </ul>
     <% end %>

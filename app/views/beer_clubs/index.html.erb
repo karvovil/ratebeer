@@ -1,7 +1,8 @@
 <h1>Beer clubs</h1>
-<%= link_to "sort by Name", beer_clubs_path(order: "name")%>
-<%= link_to "sort by year", beer_clubs_path(order: "founded")%>
-<%= link_to "sort by city", beer_clubs_path(order: "city")%>
+Sort by: 
+<%= link_to "Name", beer_clubs_path(order: "name")%>
+<%= link_to "Year", beer_clubs_path(order: "founded")%>
+<%= link_to "City", beer_clubs_path(order: "city")%>
 <div id="beer_clubs">
   <% @beer_clubs.each do |beer_club| %>
     <%= render beer_club %>

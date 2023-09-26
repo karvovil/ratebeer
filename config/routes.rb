@@ -2,9 +2,12 @@
 
 Rails.application.routes.draw do
   resources :styles
-  resources :memberships
   resources :beer_clubs
   resources :beers
+  
+  resources :memberships do
+    post 'confirm', on: :member
+  end
 
   resources :users do
     post 'toggle_activity', on: :member
@@ -31,4 +34,5 @@ Rails.application.routes.draw do
   # get 'places/:id', to: 'places#show'
   post 'places', to: 'places#search'
 
+  get 'beerlist', to: 'beers#list'
 end

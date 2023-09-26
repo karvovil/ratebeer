@@ -24,6 +24,7 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(membership_params)
     @membership.user = current_user
+    @membership.confirmed = false
     respond_to do |format|
       if @membership.save
         format.html { redirect_to beer_club_url(@membership.beer_club), notice: "#{@membership.user.username} welcome to the club" }
@@ -56,6 +57,13 @@ class MembershipsController < ApplicationController
       format.html { redirect_to user_url(current_user), notice: "Membership in #{@membership.beer_club.name} ended" }
       format.json { head :no_content }
     end
+  end
+
+  def confirm
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, true
+
+    redirect_to membership.beer_club, notice: "Membership accepted"
   end
 
   private

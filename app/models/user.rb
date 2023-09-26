@@ -40,6 +40,10 @@ class User < ApplicationRecord
     breweries.uniq.max_by(&:average_rating)
   end
 
+  def get_membership(beer_club)
+    (memberships & beer_club.memberships).first
+  end
+
   def self.top(num)
     sorted_by_rating_in_desc_order = User.all.sort_by{ |a| a.ratings.count }
     sorted_by_rating_in_desc_order.last(num).reverse

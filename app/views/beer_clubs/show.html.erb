@@ -1,10 +1,26 @@
 <%= render @beer_club %>
 
+<% if current_user.get_membership(@beer_club)&.confirmed %> 
+  <strong>Waiting confirmation</strong>
+  <ul>
+    <% @beer_club.users.each do |user| %>
+      <% if !user.get_membership(@beer_club).confirmed %> 
+        <li>
+          <%= link_to user.username, user %>
+          <%= link_to "Confirm", confirm_membership_path(user.get_membership(@beer_club).id), data: {turbo_method: "post"}, class:"btn btn-success" %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
 <div id="members">
   <strong>Members:</strong>
   <ul>
     <% @beer_club.users.each do |user| %>
-      <li><%= link_to user.username, user, class:"btn btn-info" %></li>
+      <% if user.get_membership(@beer_club).confirmed %> 
+        <li><%= link_to user.username, user %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>
@@ -13,7 +29,7 @@
 
   <% if current_user.beer_clubs.include?(@beer_club) %>
     <%= form_with(
-      url: "/memberships/#{(current_user.memberships & @beer_club.memberships).first.id}", method: :delete) do |form| %>
+      url: "/memberships/#{(current_user.get_membership(@beer_club)).id}", method: :delete) do |form| %>
       <%= form.submit "End the membership" %>
     <% end %>
 
