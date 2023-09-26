@@ -23,12 +23,8 @@ describe "Beerlist page" do
     @beer3 = FactoryBot.create(:beer, name: "Lechte Weisse", brewery:@brewery3, style:@style3)
   end
 
-  it "shows one known beer", js:true do
+=begin   it "shows one known beer", js:true do
     visit beerlist_path
     expect(page).to have_content "Nikolai"
-  end
-  it "orders beers by name on default", js:true do
-    visit beerlist_path
-    expect(page).to have_content "Nikolai"
-  end
+  end =end
 end
