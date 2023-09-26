@@ -1,11 +1,11 @@
 module RatingAverage
   extend ActiveSupport::Concern
+
   def average_rating
-    if ratings.empty?
-      0
-    else
-      rates = ratings.map(&:score)
-      rates.sum.to_f / ratings.count
-    end
+    # tehdään laskelmat muistiin haettujen olueen liittyvien ratings-olioiden avulla
+    rating_count = ratings.size
+    
+    return 0 if rating_count == 0
+    ratings.map{ |r| r.score }.sum / rating_count
   end
 end
