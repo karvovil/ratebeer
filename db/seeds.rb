@@ -9,12 +9,11 @@
 #   Character.create(name: "Luke", movie: movies.first)
 Brewery.destroy_all
 Style.destroy_all
-User.destroy_all
 BeerClub.destroy_all
 
-b1 = Brewery.create name: 'Koff', year: 1897
-b2 = Brewery.create name: 'Malmgard', year: 2001
-b3 = Brewery.create name: 'Weihenstephaner', year: 1040
+b1 = Brewery.create name: 'Koff', year: 1897, active: true
+b2 = Brewery.create name: 'Malmgard', year: 2001, active: true
+b3 = Brewery.create name: 'Weihenstephaner', year: 1040, active: true
 
 d1 = "Lager (/ˈlɑːɡər/) is a type of beer which has been brewed and conditioned at low temperature. Lagers can be pale, amber, or dark. Pale lager is the most widely consumed and commercially available style of beer. The term `lager` comes from the German for `storage`, as the beer was stored before drinking, traditionally in the same cool caves in which it was fermented."
 d2 = "Pale ale is a golden to amber coloured beer style brewed with pale malt. The term first appeared in England around 1703 for beers made from malts dried with high-carbon coke, which resulted in a lighter colour than other beers popular at that time. Different brewing practices and hop quantities have resulted in a range of tastes and strengths within the pale ale family"
