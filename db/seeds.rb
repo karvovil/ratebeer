@@ -9,7 +9,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 Brewery.destroy_all
 Style.destroy_all
-BeerClub.destroy_all
 
 b1 = Brewery.create name: 'Koff', year: 1897, active: true
 b2 = Brewery.create name: 'Malmgard', year: 2001, active: true
