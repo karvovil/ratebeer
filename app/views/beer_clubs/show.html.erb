@@ -1,6 +1,6 @@
 <%= render @beer_club %>
 
-<% if current_user.get_membership(@beer_club)&.confirmed %> 
+<% if current_user&.get_membership(@beer_club)&.confirmed %> 
   <strong>Waiting confirmation</strong>
   <ul>
     <% @beer_club.users.each do |user| %>
