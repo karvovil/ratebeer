@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
+  resources :styles do
+    get 'about', on: :collection
+  end
+
   resources :styles
   resources :beer_clubs
   resources :beers
@@ -16,7 +21,7 @@ Rails.application.routes.draw do
   resources :breweries do
     post 'toggle_activity', on: :member
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'breweries#index'
 

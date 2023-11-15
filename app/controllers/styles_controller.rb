@@ -3,11 +3,21 @@ class StylesController < ApplicationController
 
   # GET /styles or /styles.json
   def index
+    # now this takes only care of the full page reloads
     @styles = Style.all
+  end
+
+  # own controller function for the partial
+  def about 
+    render partial: 'about'
   end
 
   # GET /styles/1 or /styles/1.json
   def show
+    if turbo_frame_request?
+      render partial: 'details', locals: { style: @style } 
+    end
+    # the default is a full page reload
   end
 
   # GET /styles/new
