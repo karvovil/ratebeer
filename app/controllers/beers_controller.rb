@@ -21,7 +21,18 @@ class BeersController < ApplicationController
     @last_page = (Beer.count / PAGE_SIZE).ceil
     offset = (@page - 1) * PAGE_SIZE
 
-    @beers = Beer.order(:name).limit(PAGE_SIZE).offset(offset)
+    @beers = case @order
+      when "name"    then Beer.order(:name)
+        .limit(PAGE_SIZE).offset(offset)
+      when "brewery" then Beer.joins(:brewery)
+        .order("breweries.name").limit(PAGE_SIZE).offset(offset)
+      when "style"   then Beer.joins(:style)
+        .order("styles.name").limit(PAGE_SIZE).offset(offset)
+      when "rating"  then Beer.left_joins(:ratings)
+        .select("beers.*, avg(ratings.score)")
+        .group("beers.id")
+        .order("avg(ratings.score) DESC").limit(PAGE_SIZE).offset(offset)
+    end
   end
 
   # GET /beers/1 or /beers/1.json
