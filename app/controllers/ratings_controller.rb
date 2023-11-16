@@ -4,13 +4,24 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: %i[show edit update destroy]
 
+  PAGE_SIZE = 15
   def index
-    @ratings = Rating.all
+    @reverse = params[:reverse] || false
+    @page = params[:page]&.to_i || 1
+    @last_page = (Rating.count / PAGE_SIZE).ceil
+    offset = (@page - 1) * PAGE_SIZE
+
+    @ratings = Rating.order(:created_at).limit(PAGE_SIZE).offset(offset)
+    if @reverse
+      @ratings = @ratings.reverse_order()
+    end
+
     @recent_ratings = Rating.recent
     @top_breweries = Brewery.top 3
     @top_beers = Beer.top 3
     @top_users = User.top 3
     @top_styles = Style.top 3
+
   end
 
   def show

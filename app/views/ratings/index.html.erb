@@ -24,8 +24,27 @@ Number of ratings: <%= @ratings.count %>
   <% end %>
 
 <p>
-<h2>Recent Ratings</h2>
-<% @recent_ratings.each do |rating| %>
+<h2>Ratings</h2>
+<tr>
+  <td colspan="2" class="text-center">
+    <% if @reverse %>
+      <%= link_to " ASC ", ratings_path(page: 1) %>
+    <% else %>
+      <%= link_to " DESC ", ratings_path(page: 1, reverse: true) %>
+    <% end %>
+  </td>
+  <td colspan="2" class="text-center">
+    <% unless @page == 1 %>
+      <%= link_to "<<< Previous page", ratings_path(page: @page - 1) %>
+    <% end %>
+  </td>
+  <td colspan="2" class="text-center">
+    <% unless @page == @last_page %>
+      <%= link_to "Next page >>>", ratings_path(page: @page + 1) %>
+    <% end %>
+  </td>
+</tr>
+<% @ratings.each do |rating| %>
   <li> 
     <%= render rating %>
     <%= rating.created_at %>
