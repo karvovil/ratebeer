@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "rating_details" do %>
+  <h3><%= rating.beer.name %></h3>
+  <p>
+    <strong>style: </strong>
+    <%= rating.beer.style.name %>
+  </p>
+  <p>
+    <strong>brewed by </strong>
+    <%= rating.beer.brewery %>
+  </p>
+  <p>
+    <strong>rated </strong>
+    <%= rating.created_at %>
+  </p>
+
+
+<% end %>

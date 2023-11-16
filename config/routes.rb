@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   root 'breweries#index'
 
-  resources :ratings, only: %i[index new create destroy]
+  resources :ratings, only: %i[index new create destroy show]
 
   get 'signup', to: 'users#new'
   

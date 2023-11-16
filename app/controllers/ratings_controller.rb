@@ -2,6 +2,8 @@
 
 # comment
 class RatingsController < ApplicationController
+  before_action :set_rating, only: %i[show edit update destroy]
+
   def index
     @ratings = Rating.all
     @recent_ratings = Rating.recent
@@ -9,6 +11,12 @@ class RatingsController < ApplicationController
     @top_beers = Beer.top 3
     @top_users = User.top 3
     @top_styles = Style.top 3
+  end
+
+  def show
+    if turbo_frame_request?
+      render partial: 'details', locals: { rating: @rating } 
+    end
   end
 
   def new
@@ -32,5 +40,9 @@ class RatingsController < ApplicationController
     rating = Rating.find params[:id]
     rating.delete if current_user == rating.user
     redirect_to user_path(current_user)
+  end
+
+  def set_rating
+    @rating = Rating.find(params[:id])
   end
 end
