@@ -13,17 +13,15 @@ class BeersController < ApplicationController
   end
 
   # GET /beers or /beers.json
+  PAGE_SIZE = 20
+
   def index
-    @beers = Beer.includes(:brewery, :style, :ratings).all
+    @order = params[:order] || 'name'
+    @page = params[:page]&.to_i || 1
+    @last_page = (Beer.count / PAGE_SIZE).ceil
+    offset = (@page - 1) * PAGE_SIZE
 
-    order = params[:order] || 'name'
-
-    @beers = case order
-             when "name" then @beers.sort_by(&:name)
-             when "brewery" then @beers.sort_by { |b| b.brewery.name }
-             when "style" then @beers.sort_by { |b| b.style.name }
-             when "rating" then @beers.sort_by(&:average_rating).reverse
-             end
+    @beers = Beer.order(:name).limit(PAGE_SIZE).offset(offset)
   end
 
   # GET /beers/1 or /beers/1.json
