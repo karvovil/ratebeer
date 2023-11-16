@@ -33,6 +33,13 @@ class BeersController < ApplicationController
         .group("beers.id")
         .order("avg(ratings.score) DESC").limit(PAGE_SIZE).offset(offset)
     end
+    
+    if turbo_frame_request?
+      render partial: "beer_list",
+        locals: { beers: @beers, page: @page, order: @order, last_page: @last_page }
+    else
+      render :index
+    end
   end
 
   # GET /beers/1 or /beers/1.json
