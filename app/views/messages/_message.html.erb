@@ -1,12 +1,8 @@
 <div id="<%= dom_id message %>">
   <p>
-    <strong>Content:</strong>
+    <strong><%= message.user.username %></strong>
     <%= message.content %>
-  </p>
+    <%= message.created_at %>
 
-  <p>
-    <strong>User:</strong>
-    <%= message.user.username %>
   </p>
-
 </div>
