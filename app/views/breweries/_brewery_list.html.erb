@@ -1,9 +1,9 @@
-<%= turbo_frame_tag "active_breweries_tag" do %>
+<%= turbo_frame_tag turbo_tag do %>
 
   <div id="breweries">
     <% breweries.each do |brewery| %>
       <%= render brewery %>
     <% end %>
   </div>
-  
+
 <% end %>

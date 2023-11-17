@@ -1,7 +1,7 @@
 <div id="<%= dom_id brewery %>">
   <p>
     <h4>
-      <strong><%= link_to brewery.name, brewery %></strong>
+      <strong><%= link_to brewery.name, brewery, data: { turbo_frame: "_top"} %></strong>
     </h4>
     <i> Established at <%= brewery.year %> </i>
     <% if not brewery.active  %>
@@ -18,7 +18,7 @@
   </p>
   <p>
     <% brewery.beers.each do |beer| %>
-      <%= link_to beer.name, beer %>
+      <%= link_to beer.name, beer, data: { turbo_frame: "_top"} %>
     <% end %>
   </p>
 

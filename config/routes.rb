@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :breweries do
     post 'toggle_activity', on: :member
     get 'active', on: :collection
+    get 'retired', on: :collection
   end
 # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

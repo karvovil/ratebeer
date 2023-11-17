@@ -71,7 +71,10 @@ class BreweriesController < ApplicationController
   end
 
   def active
-    render partial: 'brewery_list', locals: { breweries: Brewery.active } 
+    render partial: 'brewery_list', locals: { breweries: Brewery.active, turbo_tag: "active_breweries_tag"} 
+  end
+  def retired
+    render partial: 'brewery_list', locals: { breweries: Brewery.retired, turbo_tag: "retired_breweries_tag"} 
   end
 
   private
