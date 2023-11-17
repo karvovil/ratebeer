@@ -3,7 +3,7 @@
 # comment
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :active, :retired]
   before_action :ensure_that_is_admin, only: [:destroy]
 
   # GET /breweries or /breweries.json
@@ -29,6 +29,10 @@ class BreweriesController < ApplicationController
 
     respond_to do |format|
       if @brewery.save
+        format.turbo_stream {
+          status = @brewery.active? ? "active" : "retired"
+          render turbo_stream: turbo_stream.append("#{status}_brewery_rows", partial: "brewery_row", locals: { brewery: @brewery })
+        }
         format.html { redirect_to brewery_url(@brewery), notice: 'Brewery was successfully created.' }
         format.json { render :show, status: :created, location: @brewery }
       else
@@ -71,10 +75,10 @@ class BreweriesController < ApplicationController
   end
 
   def active
-    render partial: 'brewery_list', locals: { breweries: Brewery.active, turbo_tag: "active_breweries_tag"} 
+    render partial: 'brewery_list', locals: { breweries: Brewery.active, status: "active"} 
   end
   def retired
-    render partial: 'brewery_list', locals: { breweries: Brewery.retired, turbo_tag: "retired_breweries_tag"} 
+    render partial: 'brewery_list', locals: { breweries: Brewery.retired, status: "retired"} 
   end
 
   private

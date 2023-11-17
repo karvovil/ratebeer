@@ -36,4 +36,15 @@ class Brewery < ApplicationRecord
     sorted_by_rating_in_desc_order = Brewery.all.sort_by(&:average_rating)
     sorted_by_rating_in_desc_order.last(num).reverse
   end
+
+  after_create_commit do 
+    target_id = if active
+      "active_brewery_rows"
+    else
+      "retired_brewery_rows"
+    end
+
+    broadcast_append_to "breweries_index", partial: "breweries/brewery_row", target: target_id
+  end
+  
 end

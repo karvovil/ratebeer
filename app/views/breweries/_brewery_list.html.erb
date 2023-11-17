@@ -1,9 +1,16 @@
-<%= turbo_frame_tag turbo_tag do %>
-
-  <div id="breweries">
+<%= turbo_frame_tag  status+"_breweries_tag" do %>
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th>year</th>
+    <th>count</th>
+    <th>rating</th>
+  </thead>
+  <tbody id="<%= status %>_brewery_rows">
     <% breweries.each do |brewery| %>
-      <%= render brewery %>
+      <%= render "brewery_row", brewery: brewery %>
     <% end %>
-  </div>
+  </tbody>
+</table>
 
 <% end %>
