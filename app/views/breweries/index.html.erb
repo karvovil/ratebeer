@@ -3,9 +3,9 @@
 <h2>Active</h2>
 
 <p> Number of active breweries: <%= @active_breweries.count %></p>
-<div id="active_breweries">
-  <%= render "brewery_list", breweries: @active_breweries%>
-</div>
+<%= turbo_frame_tag "active_breweries_tag", src: active_breweries_path do %>
+    Finding active breweries...
+<% end %>
 
 <h2>Retired</h2>
 <p> Number of retired breweries: <%= @retired_breweries.count %> </p>
