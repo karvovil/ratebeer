@@ -24,6 +24,11 @@
         <strong>Favorite beer: </strong>
         <%= @user.favorite_beer %>
       </p>
+      <p>
+        <%= turbo_frame_tag "beer_recommendation_tag", src: recommendation_user_path do %>
+          calculating the recommendation...
+        <% end %>
+      </p>
     <% end %>
   </p>
 

@@ -72,6 +72,15 @@ class UsersController < ApplicationController
     redirect_to user, notice: "user activity status changed to #{new_status}"
   end
 
+  def recommendation
+    # simulate a delay in calculating the recommendation
+    sleep(5)
+    ids = Beer.pluck(:id)
+    # our recommendation us just a randomly picked beer...
+    random_beer = Beer.find(ids.sample)
+    render partial: 'recommendation', locals: { beer: random_beer } 
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -83,4 +92,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
   end
+  
 end

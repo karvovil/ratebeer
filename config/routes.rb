@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :users do
     post 'toggle_activity', on: :member
+    get 'recommendation', on: :member
   end
   
   resources :breweries do
