@@ -3,6 +3,7 @@
     <strong><%= message.user.username %></strong>
     <%= message.content %>
     <%= message.created_at %>
+    <%= link_to "X", message, data: {turbo_method: :delete }, class: "btn btn-danger" %>
 
   </p>
 </div>
