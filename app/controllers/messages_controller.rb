@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.append("messages", partial: "message", locals: { message: @message })
+          render turbo_stream: turbo_stream.prepend("messages", partial: "message", locals: { message: @message })
         }
         format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
         format.json { render :show, status: :created, location: @message }
