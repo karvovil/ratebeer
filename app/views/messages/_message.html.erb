@@ -1,11 +1,10 @@
 <div id="<%= dom_id message %>">
   <p>
+    <%= link_to "X", message, data: {turbo_method: :delete, turbo_confirm: "Are you sure ?"  },
+                              class: "btn btn-danger" %>
     <strong><%= message.user.username %></strong>
     <%= message.content %>
     <%= message.created_at %>
-    <%= link_to "X", message, data: {turbo_method: :delete, turbo_confirm: "Are you sure ?"  },
-                              form: { data: { turbo_confirm: "Are you sure ?" } },
-                              class: "btn btn-danger" %>
 
   </p>
 </div>

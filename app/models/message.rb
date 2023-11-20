@@ -5,5 +5,9 @@ class Message < ApplicationRecord
     broadcast_prepend_to "messages_index", partial: "messages/message", target: "messages"
   end
 
+  after_destroy_commit do
+    broadcast_remove_to "messages_index"
+  end
+
 end
 
