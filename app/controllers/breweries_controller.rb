@@ -83,12 +83,6 @@ class BreweriesController < ApplicationController
   def retired
     render partial: 'brewery_list', locals: { breweries: Brewery.retired, status: "retired"} 
   end
-  def count_active
-    render partial: 'brewery_count', locals: { count: Brewery.active.count, status: "active"} 
-  end
-  def count_retired
-    render partial: 'brewery_count', locals: { count: Brewery.retired.count, status: "retired"} 
-  end
 
   private
 
