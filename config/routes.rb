@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     post 'toggle_activity', on: :member
     get 'active', on: :collection
     get 'retired', on: :collection
+    get 'count_active', on: :collection
+    get 'count_retired', on: :collection
   end
 # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

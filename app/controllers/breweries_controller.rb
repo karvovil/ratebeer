@@ -3,7 +3,7 @@
 # comment
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show, :active, :retired]
+  before_action :ensure_that_signed_in, except: [:index, :show, :active, :count_retired, :count_active, :retired]
   before_action :ensure_that_is_admin, only: [:destroy]
 
   # GET /breweries or /breweries.json
@@ -26,12 +26,15 @@ class BreweriesController < ApplicationController
   # POST /breweries or /breweries.json
   def create
     @brewery = Brewery.new(brewery_params)
-
     respond_to do |format|
       if @brewery.save
         format.turbo_stream {
           status = @brewery.active? ? "active" : "retired"
-          render turbo_stream: turbo_stream.append("#{status}_brewery_rows", partial: "brewery_row", locals: { brewery: @brewery })
+          count = @brewery.active? ? Brewery.active.count : Brewery.retired.count
+          render turbo_stream: [
+            turbo_stream.append("#{status}_brewery_rows", partial: "brewery_row", locals: { brewery: @brewery }),
+            turbo_stream.update("#{status}_count_id", partial: "brewery_count", locals: { count: count, status: status })
+          ]
         }
         format.html { redirect_to brewery_url(@brewery), notice: 'Brewery was successfully created.' }
         format.json { render :show, status: :created, location: @brewery }
@@ -79,6 +82,12 @@ class BreweriesController < ApplicationController
   end
   def retired
     render partial: 'brewery_list', locals: { breweries: Brewery.retired, status: "retired"} 
+  end
+  def count_active
+    render partial: 'brewery_count', locals: { count: Brewery.active.count, status: "active"} 
+  end
+  def count_retired
+    render partial: 'brewery_count', locals: { count: Brewery.retired.count, status: "retired"} 
   end
 
   private
