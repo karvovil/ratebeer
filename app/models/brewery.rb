@@ -38,13 +38,24 @@ class Brewery < ApplicationRecord
   end
 
   after_create_commit do 
-    target_id = if active
+    rows_id = if active
       "active_brewery_rows"
     else
       "retired_brewery_rows"
     end
 
-    broadcast_append_to "breweries_index", partial: "breweries/brewery_row", target: target_id
+    count_id = if active
+      "active_count_id"
+    else
+      "retired_count_id"
+    end
+
+    status = active ? "active" : "retired"
+    count = active ? Brewery.active.count : Brewery.retired.count
+
+    broadcast_append_to "breweries_index", partial: "breweries/brewery_row", target: rows_id
+    broadcast_update_to "breweries_index", partial: "breweries/brewery_count", target: count_id,
+      locals: { count: count, status: status }
   end
   
 end
