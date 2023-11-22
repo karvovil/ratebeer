@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post 'toggle_activity', on: :member
     get 'recommendation', on: :member
   end
+  get 'signup', to: 'users#new'
   
   resources :breweries do
     post 'toggle_activity', on: :member
@@ -29,9 +30,9 @@ Rails.application.routes.draw do
 
   root 'breweries#index'
 
-  resources :ratings, only: %i[index new create destroy show]
-
-  get 'signup', to: 'users#new'
+  resources :ratings, only: [:index, :new, :create, :show]
+  delete 'ratings', to: 'ratings#destroy'
+  
   
   resource :session, only: [:new, :create, :destroy]
   get 'signin', to: 'sessions#new'
