@@ -45,4 +45,6 @@ Rails.application.routes.draw do
   post 'places', to: 'places#search'
 
   get 'beerlist', to: 'beers#list'
+
+  get 'calculator', to: 'misc#calculator'
 end
