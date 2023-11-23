@@ -40,4 +40,12 @@ export default class extends Controller {
 		abv_input.value = "0"
 		price_input.value = "0"
   }
+  change(event) {
+    // a new option was selected!
+    if (event.target.value === "custom"){
+			document.getElementById("customDiv").style.display = "block"
+		}else{
+			document.getElementById("customDiv").style.display = "none"
+		}
+  } 
 }
