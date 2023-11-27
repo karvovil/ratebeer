@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+
   destroy() {
     // Confirmation dialog for the user
     const confirmDelete = confirm(
@@ -38,5 +39,14 @@ export default class extends Controller {
       .catch((error) => {
         console.log(error);
       });
+  }
+  select(event) {
+    console.log(event);
+    const checkBoxes = document.querySelectorAll('input[name="ratings[]"]')
+    if(event.target.checked){
+      checkBoxes.forEach((cb) => cb.checked = true);
+    }else{
+      checkBoxes.forEach((cb) => cb.checked = false);
+    }
   }
 }
