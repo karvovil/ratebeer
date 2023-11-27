@@ -1,4 +1,4 @@
-<div data-controller="newbrew" class="ratings mb-4">
+<div data-controller="newbrew">
   <%= form_with(model: brewery) do |form| %>
     <% if brewery.errors.any? %>
       <div style="color: red">
@@ -14,18 +14,22 @@
 
     <div>
       <%= form.label :name, style: "display: block" %>
-      <%= form.text_field :name %>
+      <%= form.text_field :name, data: { "newbrew-target": "name" } %>
     </div>
 
     <div>
       <%= form.label :year, style: "display: block" %>
-      <%= form.number_field :year %>
+      <%= form.number_field :year, data: { "newbrew-target": "year" } %>
     </div>
 
     <div>
       <%= form.label :active, style: "display: block" %>
-      <%= form.check_box :active %>
+      <%= form.check_box :active, data: { "newbrew-target": "active" } %>
     </div>
+    
+    <% if current_user %>
+      <button data-action="click->newbrew#reset">Reset</button>
+    <% end %>
 
     <div>
       <%= form.submit %>
