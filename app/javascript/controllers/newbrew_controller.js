@@ -13,4 +13,5 @@ export default class extends Controller {
       this.activeTarget.checked = false;
       this.yearTarget.value = '';
    }
+   
 }
