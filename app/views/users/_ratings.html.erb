@@ -6,7 +6,8 @@
           <input type="checkbox" name="ratings[]" value="<%= rating.id %>" />
         <% end %>
         <span>
-          <%= link_to "#{rating.id} #{rating.score} #{rating.beer.name}", rating, data: { turbo_frame: "rating_details" }  %> 
+          <%= link_to "#{rating.beer.name} ", rating, data: { turbo_frame: "rating_details" }  %> 
+          <%= rating.score %>
         </span>
       </div>
     <% end %>
