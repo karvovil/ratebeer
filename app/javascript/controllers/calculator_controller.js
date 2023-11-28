@@ -9,8 +9,6 @@ export default class extends Controller {
 			? parseFloat(this.customTarget.value)
 			: parseFloat(this.amountTarget.value)
 
-			console.log('AMOUNT' + amount);
-			console.log(this.amountTarget);
 		const abv = parseFloat(this.abvTarget.value);
 		const price = parseFloat(this.priceTarget.value);
 		// Amounts of alcohol tax per liter of pure alcohol for beers.
