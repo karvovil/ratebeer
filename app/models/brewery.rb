@@ -37,25 +37,24 @@ class Brewery < ApplicationRecord
     sorted_by_rating_in_desc_order.last(num).reverse
   end
 
-  after_create_commit do 
+  after_create_commit do
     rows_id = if active
-      "active_brewery_rows"
-    else
-      "retired_brewery_rows"
-    end
+                "active_brewery_rows"
+              else
+                "retired_brewery_rows"
+              end
 
     count_id = if active
-      "active_count_id"
-    else
-      "retired_count_id"
-    end
+                 "active_count_id"
+               else
+                 "retired_count_id"
+               end
 
     status = active ? "active" : "retired"
     count = active ? Brewery.active.count : Brewery.retired.count
 
     broadcast_append_to "breweries_index", partial: "breweries/brewery_row", target: rows_id
     broadcast_update_to "breweries_index", partial: "breweries/brewery_count", target: count_id,
-      locals: { count: count, status: status }
+                                           locals: { count:, status: }
   end
-  
 end

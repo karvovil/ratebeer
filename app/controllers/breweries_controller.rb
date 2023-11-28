@@ -33,7 +33,7 @@ class BreweriesController < ApplicationController
           count = @brewery.active? ? Brewery.active.count : Brewery.retired.count
           render turbo_stream: [
             turbo_stream.append("#{status}_brewery_rows", partial: "brewery_row", locals: { brewery: @brewery }),
-            turbo_stream.update("#{status}_count_id", partial: "brewery_count", locals: { count: count, status: status })
+            turbo_stream.update("#{status}_count_id", partial: "brewery_count", locals: { count:, status: })
           ]
         }
         format.html { redirect_to brewery_url(@brewery), notice: 'Brewery was successfully created.' }
@@ -78,10 +78,11 @@ class BreweriesController < ApplicationController
   end
 
   def active
-    render partial: 'brewery_list', locals: { breweries: Brewery.active, status: "active"} 
+    render partial: 'brewery_list', locals: { breweries: Brewery.active, status: "active" }
   end
+
   def retired
-    render partial: 'brewery_list', locals: { breweries: Brewery.retired, status: "retired"} 
+    render partial: 'brewery_list', locals: { breweries: Brewery.retired, status: "retired" }
   end
 
   private

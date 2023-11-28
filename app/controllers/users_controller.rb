@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     ids = Beer.pluck(:id)
     # our recommendation us just a randomly picked beer...
     random_beer = Beer.find(ids.sample)
-    render partial: 'recommendation', locals: { beer: random_beer } 
+    render partial: 'recommendation', locals: { beer: random_beer }
   end
 
   private
@@ -92,5 +92,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
   end
-  
 end

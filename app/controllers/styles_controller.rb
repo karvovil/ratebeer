@@ -8,15 +8,16 @@ class StylesController < ApplicationController
   end
 
   # own controller function for the partial
-  def about 
+  def about
     render partial: 'about'
   end
 
   # GET /styles/1 or /styles/1.json
   def show
-    if turbo_frame_request?
-      render partial: 'details', locals: { style: @style } 
-    end
+    return unless turbo_frame_request?
+
+    render partial: 'details', locals: { style: @style }
+
     # the default is a full page reload
   end
 

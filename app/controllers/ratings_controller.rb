@@ -13,7 +13,7 @@ class RatingsController < ApplicationController
 
     @ratings = Rating.order(:created_at).limit(PAGE_SIZE).offset(offset)
     if @reverse
-      @ratings = @ratings.reverse_order()
+      @ratings = @ratings.reverse_order
     end
 
     @recent_ratings = Rating.recent
@@ -21,13 +21,12 @@ class RatingsController < ApplicationController
     @top_beers = Beer.top 3
     @top_users = User.top 3
     @top_styles = Style.top 3
-
   end
 
   def show
-    if turbo_frame_request?
-      render partial: 'details', locals: { rating: @rating } 
-    end
+    return unless turbo_frame_request?
+
+    render partial: 'details', locals: { rating: @rating }
   end
 
   def new
@@ -48,15 +47,15 @@ class RatingsController < ApplicationController
   end
 
   def destroy
-    #rating = Rating.find params[:id]
-    #rating.delete if current_user == rating.user
-    #redirect_to user_path(current_user)
+    # rating = Rating.find params[:id]
+    # rating.delete if current_user == rating.user
+    # redirect_to user_path(current_user)
     destroy_ids = request.body.string.split(',')
     # Loop through multiple rating IDs and delete them if they exist and belong to the current user
     destroy_ids.each do |id|
-      rating = Rating.find_by(id: id)
+      rating = Rating.find_by(id:)
       rating.destroy if rating && current_user == rating.user
-    # Rescue in case one of the rating IDs is invalid so we can continue deleting the rest 
+    # Rescue in case one of the rating IDs is invalid so we can continue deleting the rest
     rescue StandardError => e
       puts "Rating record has an error: #{e.message}"
     end
