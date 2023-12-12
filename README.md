@@ -1,4 +1,6 @@
 # Ratebeer
+Beer application made in Open university RoR -course
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/909eda280ba61ac7090e/maintainability)](https://codeclimate.com/github/karvovil/ratebeer/maintainability)
 
 ## Deployment
